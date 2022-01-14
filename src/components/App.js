@@ -1,7 +1,11 @@
-import {data } from '../data'
 import Navbar from './Navbar';
 import MovieCard from './MovieCard';
-function App() {
+import React from 'react';
+
+class App extends React.Component{
+
+  render(){
+  const movies= this.props.store.getState();
   return (
     <div className="App">
       <Navbar />
@@ -11,13 +15,14 @@ function App() {
           <div className="tab">Favourites</div>
         </div>
         <div className="list">
-          {data.map(movie =>{
-            return <MovieCard movie={movie} />
+          {movies.map((movie,index) =>{
+            return <MovieCard movie={movie} key={`movies-${index}`} />
           })}
         </div>
       </div>
     </div>
   );
+}
 }
 
 export default App;
