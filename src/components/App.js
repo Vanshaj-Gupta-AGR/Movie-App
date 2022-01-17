@@ -2,6 +2,7 @@ import Navbar from './Navbar';
 import MovieCard from './MovieCard';
 import React from 'react';
 import {data } from '../data'
+import { search } from '../reducers';
 
 class App extends React.Component{
 
@@ -18,7 +19,8 @@ class App extends React.Component{
     })
   }
   isMovieFavourite=(movie)=>{
-    const {favourites}=this.props.store.getState();
+    const {movies}=this.props.store.getState()
+    const {favourites}=movies
 
     const index=favourites.indexOf(movie);
 
@@ -38,12 +40,13 @@ class App extends React.Component{
   
 
   render(){
-    const {list,favourites,show}= this.props.store.getState();
+    const {movies,search}=this.props.store.getState()
+    const {list,favourites,show}= movies;
 
     const displayMovies =show? favourites : list
     return (
       <div className="App">
-        <Navbar />
+        <Navbar dispatch={this.props.store.dispatch} search={search}/>
         <div className="main">
           <div className="tabs">
             <div className={`tab ${show ? '': 'active-tabs'}`}onClick={()=>this.chnage(false)}>Movie</div>
