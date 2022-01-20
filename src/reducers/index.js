@@ -20,7 +20,7 @@ export  function movies (state=initialMovieState,action){
     }
     if (action.type==='REMOVE_FAVOURITE'){
         const filteredArray=state.favourites.filter(movie=>{
-            return movie.title!==action.movie.title
+            return movie.Title!==action.movie.Title
         });
         return {
             ...state,
